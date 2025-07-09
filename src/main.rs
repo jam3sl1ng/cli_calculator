@@ -3,9 +3,10 @@ use std::io;
 fn main() {
     println!("Welcome to the calculator");
 
-    println!("Please enter the first number");
-
+    // Input number 1
     let mut num1 = String::new();
+
+    println!("Please enter the first number");
 
     io::stdin()
         .read_line(&mut num1)
@@ -15,5 +16,42 @@ fn main() {
         .parse()
         .expect("Please input a number!");
 
-    println!("You entered: {}", num1);
+    // Input operation
+    println!("Please select an operation (+,-,*,/):");
+
+    let mut operation = String::new();
+
+    io::stdin()
+        .read_line(&mut operation)
+        .expect("Failed to read line");
+
+    // Input number 2
+    let mut num2 = String::new();
+
+    println!("Please enter the second number");
+
+    io::stdin()
+        .read_line(&mut num2)
+        .expect("Failed to read line");
+
+    let num2: f32 = num2.trim()
+        .parse()
+        .expect("Please input a number!");
+
+    // Perform the operation
+    if operation.trim() == "+" {
+        println!("Result: {}", num1 + num2);
+    } else if operation.trim() == "-" {
+        println!("Result: {}", num1 - num2);
+    } else if operation.trim() == "*" {
+        println!("Result: {}", num1 * num2);
+    } else if operation.trim() == "/" {
+        if num2 != 0.0 {
+            println!("Result: {}", num1 / num2);
+        } else {
+            println!("Error: Division by zero is not allowed.");
+        }
+    } else {
+        println!("Error: Invalid operation selected.");
+    }
 }
